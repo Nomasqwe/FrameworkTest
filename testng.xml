@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/Users/Lenovo/IdeaProjects/FrameworkTest">
+        <classes>
+            <class name="tests.FirstTest">
+                <methods>
+                    <include name="firstTest"/>
+                </methods>
+            </class>
+            <class name="tests.hooks.Hooks"></class>
+        </classes>
+    </test>
+</suite>

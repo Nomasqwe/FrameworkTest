@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id "io.qameta.allure" version "2.11.2"
+}
+
+group = 'by.sapogov.demo-auto'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+dependencies {
+    testImplementation 'org.apache.commons:commons-io:1.3.2'
+    testImplementation 'org.testng:testng:6.14.3'
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'com.codeborne:selenide:6.17.1'
+}
+
+// Запуск тестов для TestNG через xml файл, который лежит в корне проекта
+// ./gradlew clean testNGRun -x test -Dsuite="testng.xml"
+tasks.register("testNGRun", Test.class) {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    useTestNG()
+    String suiteName = System.getProperty("suite")
+    if(suiteName!=null){
+        useTestNG {
+            suites suiteName
+        }
+    }
+}
